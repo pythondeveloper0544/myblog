@@ -26,6 +26,20 @@
 
     <meta name="msapplication-TileColor" content="#da532c" />
     <meta name="theme-color" content="#ffffff" />
+    <style>
+      .btn-outline-primary {
+        color: #007bff!important;
+      }
+      .btn-outline-primary:hover {
+        color: white!important;
+      }
+      .btn-outline-danger {
+        color: #dc3545!important;
+      }
+      .btn-outline-danger:hover {
+        color: white!important;
+      }
+    </style>
   </head>
 
   <body>
@@ -37,7 +51,11 @@
           </div>
           <ul class="nav align-items-center">
             <li><a class="list-item" href="{{ url_for('posts') }}">Blog</a></li>
+            {% if current_user.is_admin %}
             <li><a class="list-item" href="{{ url_for('create_post') }}">Create post</a></li>
+            <li><a class="list-item" href="{{ url_for('register') }}">Register</a></li>
+            {% endif %}
+            <li><a class="list-item" href="{{ url_for('login') }}">Login</a></li>
           </ul>
           <div class="burger-menu">
             <div class="bar bar--top"></div>

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 <section class="flex align-items-center">
   <div class="container">
     <div class="row article-wrapper justify-center align-top">
@@ -16,6 +17,12 @@
           {{ article.content|safe }}
         </p>
       </article>
+    </div>
+    <div>
+    {% if current_user.is_admin %}
+    <a href="{{ url_for('edit_post', id=article.id) }}" class="btn btn-outline-primary btn-sm">Edit</a>
+    <a href="{{ url_for('delete_post', id=article.id) }}" class="btn btn-outline-danger btn-sm">Delete</a>
+    {% endif %}
     </div>
   </div>
 </section>
