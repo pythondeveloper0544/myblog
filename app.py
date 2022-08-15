@@ -7,11 +7,10 @@ from slugify import slugify
 from datetime import datetime
 from flask_ckeditor import CKEditor, CKEditorField
 
+from local_settings import *
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:City0544tech@localhost:5433/blog'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = "You can't find it"
 app.config['CKEDITOR_PKG_TYPE'] = 'full-all'
 
 
