@@ -1,0 +1,29 @@
+{% extends 'base.html' %} {% block content %}
+<section class="section-title">
+  <div class="container">
+    <div class="section-content">
+      <h1>Blog</h1>
+    </div>
+  </div>
+</section>
+
+<section class="flex align-items-center">
+  <div class="container">
+    <div class="row justify-between align-top">
+      <div id="archive" class="col-md-7">
+        <ul class="list-wrapper">
+          {% for article in articles %}
+          <li>
+            <a class="list-item" href="/post/{{article.id}}/{{article.slug}}">
+              <div class="date">{{ article.date.date() }}</div>
+              <div class="title">{{ article }}</div>
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

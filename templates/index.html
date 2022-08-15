@@ -1,0 +1,42 @@
+{% extends 'base.html' %} {% block content %}
+<section id="home" class="flex align-items-center">
+  <div class="container">
+    <div class="row justify-between">
+      <div class="col-xl-8 col-lg-10 col-12 stagger-animation">
+        <div class="about flex align-items-center">
+          <img
+            class="anim-item profile-picture align-self-start"
+            src="{{ url_for('static', filename='images/Jasurbek.png') }}"
+            alt="Jasurbek"
+          />
+          <div class="about-detail anim-item">
+            <h1 class="title">Jasurbek Yusupov</h1>
+            <h3 class="desc">Python Backend developer</h3>
+            <div class="social-links flex align-items-center">
+              <a target="_blank" href="https://github.com/pythondeveloper0544">
+                <img src="/static/images/github.svg" width="22"
+              /></a>
+              <a
+                class="icon-linkedin"
+                target="_blank"
+                href="https://www.linkedin.com/in/jasurbek-yusupov-092999231/"
+              >
+                <img src="/static/images/linkedin.svg" width="22" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="detail">
+          <div class="btns-wrapper anim-item">
+            <a href="{{ url_for('posts') }}" class="btn btn-primary"
+              >Read Blog</a
+            >
+            <a href="" class="btn btn-secondary">About Me</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

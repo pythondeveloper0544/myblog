@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="flex align-items-center">
+  <div class="container">
+    <div class="row article-wrapper justify-center align-top">
+      <div class="article-header col-md-8">
+        <h1 class="title">{{article}}</h1>
+        <div class="date">
+          <span>{{ article.date.date() }}</span>
+        </div>
+      </div>
+
+      <article class="content col-md-8 col-12">
+       <p>
+          {{ article.content|safe }}
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+{% endblock %}
