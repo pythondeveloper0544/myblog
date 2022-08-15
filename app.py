@@ -6,16 +6,25 @@ from wtforms.validators import DataRequired
 from slugify import slugify
 from datetime import datetime
 from flask_ckeditor import CKEditor, CKEditorField
+from flask_login import LoginManager, login_required
 
 from local_settings import *
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['CKEDITOR_PKG_TYPE'] = 'full-all'
 
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SECRET_KEY'] = "You can't find it"
+app.config['CKEDITOR_PKG_TYPE'] = 'full-all'
 
 db = SQLAlchemy(app)
 ckeditor = CKEditor(app)
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+@login_manager.user_loader
+def load_user():
+    return None
 
 class Article(db.Model):
     __tablename__ = 'article'
@@ -50,6 +59,7 @@ def posts():
     return render_template('posts.html', articles=articles)
 
 @app.route('/create-post', methods=['POST', 'GET'])
+@login_required
 def create_post():
     form = ArticleForm()
     if form.validate_on_submit():
