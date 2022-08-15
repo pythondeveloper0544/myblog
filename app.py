@@ -1,5 +1,3 @@
-from email.policy import default
-from os import abort
 from flask import Flask, render_template, url_for, redirect, abort
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
