@@ -15,14 +15,14 @@ login_manager.login_view = 'login'
 
 
 app = Flask(__name__)
-app.config.from_object("config.DevelopmentConfig")
+app.config.from_object("app.config.DevelopmentConfig")
 db.init_app(app)
 migrate.init_app(app, db)
 ckeditor.init_app(app)
 login_manager.init_app(app)
 
-from . import forms, models, routes
+from app import forms, models, routes
 
-    
+
 
 

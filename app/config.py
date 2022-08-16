@@ -1,4 +1,4 @@
-from local_settings import *
+from app.local_settings import *
 class Config(object):
     DEBUG = False
     TESTING = False

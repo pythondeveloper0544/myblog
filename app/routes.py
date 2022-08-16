@@ -53,10 +53,13 @@ def edit_post(id):
         article.title = form.title.data
         article.slug = form.slug.data
         article.content = form.content.data
-        db.session.add(article)
-        db.session.commit()
-        flash('Successfully edited')
-        return redirect(f'/post/{id}/{article.slug}')
+        try:
+            db.session.add(article)
+            db.session.commit()
+            flash('Successfully edited')
+        except:
+            flash('Couldn\'t edit post')
+        return redirect(url_for('posts'))
     form.title.data = article.title
     form.slug.data = article.slug
     form.content.data = article.content
