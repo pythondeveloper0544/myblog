@@ -1,5 +1,5 @@
 from flask import render_template, url_for, redirect, abort, flash
-from flask_login import login_required, current_user, login_user
+from flask_login import login_required, current_user, login_user, logout_user
 
 from app.models import Article, Users
 from app.forms import ArticleForm, RegisterForm, LoginForm
@@ -109,6 +109,12 @@ def login():
             return redirect('register')
 
     return render_template('login.html', form=form)
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
 
 @app.route('/about_me')
 def about_me():

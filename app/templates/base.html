@@ -56,6 +56,9 @@
             {% endif %}
             <li><a class="list-item" href="{{ url_for('register') }}">Register</a></li>
             <li><a class="list-item" href="{{ url_for('login') }}">Login</a></li>
+            {% if current_user.is_authenticated %}
+            <li><a class="list-item" href="{{ url_for('logout') }}">Logout</a></li>
+            {% endif %}
           </ul>
           <div class="burger-menu">
             <div class="bar bar--top"></div>
