@@ -53,8 +53,8 @@
             <li><a class="list-item" href="{{ url_for('posts') }}">Blog</a></li>
             {% if current_user.is_admin %}
             <li><a class="list-item" href="{{ url_for('create_post') }}">Create post</a></li>
-            <li><a class="list-item" href="{{ url_for('register') }}">Register</a></li>
             {% endif %}
+            <li><a class="list-item" href="{{ url_for('register') }}">Register</a></li>
             <li><a class="list-item" href="{{ url_for('login') }}">Login</a></li>
           </ul>
           <div class="burger-menu">
