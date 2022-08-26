@@ -6,7 +6,7 @@
         <div class="about flex align-items-center">
           <img
             class="anim-item profile-picture align-self-start"
-            src="{{ url_for('static', filename='images/Jasurbek.png') }}"
+            src="{{ url_for('static', filename='img/Jasurbek.png') }}"
             alt="Jasurbek"
           />
           <div class="about-detail anim-item">
@@ -14,14 +14,14 @@
             <h3 class="desc">Python Backend developer</h3>
             <div class="social-links flex align-items-center">
               <a target="_blank" href="https://github.com/pythondeveloper0544">
-                <img src="/static/images/github.svg" width="22"
-              /></a>
+                <i class="uil uil-github"></i>
+              </a>
               <a
                 class="icon-linkedin"
                 target="_blank"
                 href="https://www.linkedin.com/in/jasurbek-yusupov-092999231/"
               >
-                <img src="/static/images/linkedin.svg" width="22" />
+                <i class="uil uil-linkedin"></i>
               </a>
             </div>
           </div>
@@ -29,10 +29,8 @@
 
         <div class="detail">
           <div class="btns-wrapper anim-item">
-            <a href="{{ url_for('posts') }}" class="btn btn-primary"
-              >Read Blog</a
-            >
-            <a href="{{ url_for('about_me') }}" class="btn btn-secondary">About Me</a>
+            <a href="{{ url_for('posts.show_posts') }}" class="btn btn-primary">Read Blog</a>
+            <a href="{{ url_for('main.about_me') }}" class="btn btn-secondary">About Me</a>
           </div>
         </div>
       </div>

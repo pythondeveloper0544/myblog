@@ -1,13 +1,10 @@
-{% extends 'base.html' %} {% block content %}
-{% with messages = get_flashed_messages() %}
-      {% if messages %}
-      <ul class=flashes>
-        {% for message in messages %}
-        <li>{{ message }}</li>
-        {% endfor %}
-      </ul>
-      {% endif %}
-      {% endwith %}
+{% extends 'base.html' %}
+{% block nav %}
+    {% if current_user.is_admin %}
+        <li><a class="list-item" href="{{ url_for('posts.create_post') }}">Create post</a></li>
+    {% endif %}
+{% endblock %}
+{% block content %}
 <section class="section-title">
   <div class="container">
     <div class="section-content">
@@ -20,11 +17,13 @@
   <div class="container">
     <div class="row justify-between align-top">
       <div id="archive" class="col-md-7">
+      <h4 class="sticky">2022</h4>
+      <h4>August</h4>
         <ul class="list-wrapper">
           {% for article in articles %}
           <li>
             <a class="list-item" href="/post/{{article.id}}/{{article.slug}}">
-              <div class="date">{{ article.date.date() }}</div>
+              <div class="date">{{ article.date.date() }} {{ article.poster }}</div>
               <div class="title">{{ article }}</div>
             </a>
           </li>

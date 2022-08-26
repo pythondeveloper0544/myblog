@@ -3,16 +3,20 @@ from slugify import slugify
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from app import db
+from myblog import db, login_manager
+from datetime import datetime
 
+@login_manager.user_loader
+def load_user(user_id):
+    return Users.query.get(int(user_id))
 
 class Article(db.Model):
-    __tablename__ = 'article'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(255), nullable=False)
     slug = db.Column(db.String(255), nullable=False, unique=True)
     content = db.Column(db.Text, nullable=False)
     date = db.Column(db.DateTime, default=datetime.utcnow)
+    poster_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     def __init__(self, *args, **kwargs):
         if not 'slug' in kwargs:
@@ -30,6 +34,7 @@ class Users(UserMixin, db.Model):
     password_hash = db.Column(db.String(125))
     joined_at = db.Column(db.DateTime, default=datetime.utcnow)
     admin = db.Column(db.Boolean, default=False)
+    posts = db.relationship(Article, backref="poster")
 
     @property
     def is_admin(self):

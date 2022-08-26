@@ -1,18 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700");
-@font-face {
-  font-family: 'icomoon';
-  src:  url('../fonts/icomoon907d.eot?5h30r5');
-  src:  url('../fonts/icomoon907d.eot?5h30r5#iefix') format('embedded-opentype'),
-    url('../fonts/icomoon907d.ttf?5h30r5') format('truetype'),
-    url('../fonts/icomoon907d.woff?5h30r5') format('woff'),
-    url('../fonts/icomoon907d.svg?5h30r5#icomoon') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-
 [class^="icon-"], [class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'icomoon' !important;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -22,19 +10,6 @@
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-.icon-mail2:before {
-  content: "\ea84";
-}
-.icon-facebook2:before {
-  content: "\ea91";
-}
-.icon-twitter:before {
-  content: "\ea96";
-}
-.icon-github:before {
-  content: "\eab0";
 }
 
 * {
@@ -1021,14 +996,17 @@ article pre {
   color: #6a737d;
 }
 
-.talks li {
-  display: flex;
-  align-items:center;
-  margin-bottom: 20px;
+.form-signin {
+    max-width: 330px;
+    padding: 15px;
 }
 
-.talks li a.list-item {
-  flex: 1;
-  margin-left: 20px;
-  padding: 0px;
+.form-floating {
+    position: relative;
+}
+
+.message {
+  position: fixed;
+  top: 10%;
+  left: 14%;
 }
