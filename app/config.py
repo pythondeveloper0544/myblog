@@ -1,4 +1,7 @@
-from app.local_settings import *
+import os
+
+DATABASE_CONNECTION = os.environ.get("DATABASE_CONNECTION")
+
 class Config(object):
     DEBUG = False
     TESTING = False
