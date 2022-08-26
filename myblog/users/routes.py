@@ -16,7 +16,7 @@ def register():
         user.set_password(form.password1.data)
         db.session.add(user)
         db.session.commit()
-        flash('Your account has been created')
+        flash('Your account has been created', "success")
         return redirect('login')
     return render_template('users/register.html', form=form)
 
@@ -28,10 +28,10 @@ def login():
         user = Users.query.filter_by(email=form.email.data).first()
         if user and user.check_password(form.password.data):
             login_user(user, remember=form.remember.data)
-            flash("You're successfully logged in!")
+            flash("You're successfully logged in!", "success")
             return redirect('/')
         else:
-            flash('Login unsuccessfully. Please check email an password again.')
+            flash('Login unsuccessfully. Please check email an password again.', "warning")
     return render_template('users/login.html', form=form)
 
 

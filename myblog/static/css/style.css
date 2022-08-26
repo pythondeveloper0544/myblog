@@ -1006,7 +1006,8 @@ article pre {
 }
 
 .message {
-  position: fixed;
-  top: 10%;
-  left: 14%;
+  /*position: fixed;*/
+  /*top: 10%;*/
+  /*left: 14%;*/
+  margin-top: 75px;
 }

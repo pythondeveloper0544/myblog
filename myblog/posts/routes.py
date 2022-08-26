@@ -42,6 +42,9 @@ def post_detail(id, slug):
 @login_required
 def edit_post(id):
     article = Article.query.get_or_404(id)
+    if article.poster == current_user:
+        flash('You can\'t edit this post', "danger")
+        return redirect(f'/post/{article.id}/{article.slug}')
     form = ArticleForm()
     if form.validate_on_submit():
         article.title = form.title.data
@@ -50,16 +53,19 @@ def edit_post(id):
         db.session.add(article)
         db.session.commit()
         flash('Post has been edited')
-        return redirect(url_for('posts.show_posts'))
+        return redirect(f'/post/{article.id}/{article.slug}')
     form.title.data = article.title
     form.slug.data = article.slug
     form.content.data = article.content
     return render_template('posts/edit_post.html', form=form)
 
 @posts.route('/delete-post/<int:id>')
-@login_required
+
 def delete_post(id):
     article = Article.query.get_or_404(id)
+    if article.poster is current_user:
+        flash(f'You can\'t delete this post', "danger")
+        return redirect(f'/post/{article.id}/{article.slug}')
     db.session.delete(article)
     db.session.commit()
     flash('Post has been deleted')
