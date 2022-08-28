@@ -18,6 +18,13 @@
                     </p>
                 </article>
             </div>
+        <div class="input-group">
+            <form action="/add-comment/{{ article.id }}" method="post">
+                <label for="comment" class="form-label">Add comment</label>
+                <textarea name="comment" id="comment" class="form-control mb-3"></textarea>
+                <button type="submit" class="btn btn-primary">Comment</button>
+            </form>
+        </div>
             <div>
                 {% if current_user.is_admin %}
                     <a href="{{ url_for('posts.edit_post', id=article.id) }}" class="btn btn-outline-primary btn-sm">Edit</a>

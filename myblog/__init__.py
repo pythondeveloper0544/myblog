@@ -9,9 +9,10 @@ from myblog.config import Config
 db = SQLAlchemy()
 migrate = Migrate()
 ckeditor = CKEditor()
-
 login_manager = LoginManager()
-login_manager.login_view = 'login'
+login_manager.login_view = 'users.login'
+login_manager.login_message_category = 'info'
+
 
 def create_app(config_class=Config):
     app = Flask(__name__)
