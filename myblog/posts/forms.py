@@ -2,8 +2,6 @@ from flask_ckeditor import CKEditorField
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectField
 from wtforms.validators import DataRequired
-from myblog.models import Topic
-
 
 
 class ArticleForm(FlaskForm):

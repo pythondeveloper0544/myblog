@@ -1,8 +1,8 @@
-from flask import Blueprint, redirect, url_for, render_template, flash, make_response
+from flask import Blueprint, redirect, url_for, render_template, flash
 from flask_login import login_required, logout_user, login_user
 
 from myblog import db
-from myblog.models import Users
+from myblog.models.models import Users
 from myblog.users.forms import RegisterForm, LoginForm
 
 users = Blueprint('users', __name__)
