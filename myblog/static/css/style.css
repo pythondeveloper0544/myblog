@@ -616,7 +616,6 @@ ul.page-numbers li a:hover {
     width: 100%;
     border: 1px solid #eee;
     font-size: 13px;
-    text-transform: uppercase;
     font-weight: 500;
     color: #7a7a7a;
     outline: none;
@@ -1079,11 +1078,6 @@ footer p a:hover {
         margin-top: 60px;
     }
 }
-
-
-/**
- * MAIN
- */
 
 .main .container {
     display: grid;

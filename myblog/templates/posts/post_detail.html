@@ -106,7 +106,7 @@
                       <h2>Your comment</h2>
                     </div>
                     <div class="content">
-                      <form action="/add-comment/{{ article.id }}" method="post">
+                      <form action="{{ url_for('posts.add_comment', id=article.id) }}" method="post">
                         <div class="row">
                             <div class="col-lg-12">
                             <fieldset>

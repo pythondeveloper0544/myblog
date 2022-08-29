@@ -65,10 +65,11 @@
                                     </div>
                                 </div>
                             {% endfor %}
-                        {% if articles.has_next or articles.has_prev %}
                             <div class="col-lg-12">
                                 <ul class="page-numbers">
+
                                     {% for page_num in articles.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                                      {% if page_num > 1 %}
                                         {% if page_num %}
                                             {% if articles.page == page_num %}
                                                 <li class="active"><a href="{{ url_for('posts.show_posts', page=page_num) }}">{{ page_num }}</a></li>
@@ -77,15 +78,14 @@
                                             {% endif %}
                                         {% else %}
                                             <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
-                                        {% endif %}
+                                        {% endif %}{% endif %}
                                     {% endfor %}
+
                                 </ul>
                             </div>
-                        {% endif %}
                         </div>
                     </div>
-                </div>
-            {% include 'inc/_sidebar.html' %}
+                    {% include 'inc/_sidebar.html' %}
             </div>
         </div>
     </section>

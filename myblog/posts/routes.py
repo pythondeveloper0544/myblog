@@ -87,7 +87,7 @@ def delete_post(id):
         return redirect(f'/post/{article.id}/{article.slug}')
     db.session.delete(article)
     db.session.commit()
-    flash('Post has been deleted')
+    flash('Post has been deleted', "success")
     return redirect(url_for('posts.show_posts'))
 
 @posts.route('/add-comment/<int:id>', methods=['POST'])

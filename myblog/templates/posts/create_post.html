@@ -16,6 +16,7 @@
          <br>
          {{ form.tags.label(class="form-label") }} :
         {{ form.tags(class="form-control") }}
+     {% if tags %}
      <div class="w-25 mt-4 mb-4">
          <h6 class="pb-3">Existed tags:</h6>
          <div>
@@ -26,6 +27,7 @@
              </ul>
          </div>
      </div>
+     {% endif %}
         <br>
         {{ form.submit(class="btn btn-primary w-100") }}
      </form>

@@ -27,7 +27,7 @@ class Article(db.Model):
     poster_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     comments = db.relationship('Comment', passive_deletes=True)
     topic = db.Column(db.Integer, db.ForeignKey('topic.id'))
-    tags = db.relationship('Tag', secondary=post_tag)
+    tags = db.relationship('Tag', secondary=post_tag, backref="posts")
 
     def __init__(self, *args, **kwargs):
         if not 'slug' in kwargs:
