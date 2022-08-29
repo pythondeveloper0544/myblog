@@ -5,82 +5,77 @@
 
     <title>Jasurbek's Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-    <link
-            href="{{ url_for('static', filename='css/flexgridcombo.css') }}"
-            rel="stylesheet"
-    />
-    {#    <link#}
-    {#            rel="stylesheet"#}
-    {#            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"#}
-    {#    />#}
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap"
+          rel="stylesheet">
+    <link href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}" rel="stylesheet"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-
-    <link
-            href="{{ url_for('static', filename='css/style.css') }}"
-            rel="stylesheet"
-    />
-    <link
-            rel="shortcut icon"
-            href="{{ url_for('static', filename='img/logo.png') }}"
-            type="image/x-icon"
-    />
-
-    <meta name="msapplication-TileColor" content="#da532c"/>
-    <meta name="theme-color" content="#ffffff"/>
-    <style>
-        .btn-outline-primary {
-            color: #007bff !important;
-        }
-
-        .btn-outline-primary:hover {
-            color: white !important;
-        }
-
-        .btn-outline-danger {
-            color: #dc3545 !important;
-        }
-
-        .btn-outline-danger:hover {
-            color: white !important;
-        }
-    </style>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/x-icon"/>
+    <link href="{{ url_for('static', filename='css/fontawesome.css') }}" rel="stylesheet"/>
+    <link href="{{ url_for('static', filename='css/owl.css') }}" rel="stylesheet"/>
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet"/>
 </head>
 
 <body>
-<header class="header--title flex align-items-center">
-    <div class="container">
-        <div class="align-items-center flex">
-            <div class="logo-wrapper">
-                <a class="logo" href="/">Jasurbek's Blog</a>
-            </div>
-            <ul class="nav align-items-center">
-                <li><a class="list-item" href="{{ url_for('posts.show_posts') }}">Blog</a></li>
-                {% block nav %}{% endblock %}
-                {% if current_user.is_authenticated %}
-                    <li><a class="list-item" href="{{ url_for('users.logout') }}">Logout</a></li>
-                {% else %}
-                    <li><a class="list-item" href="{{ url_for('users.register') }}">Register</a></li>
-                    <li><a class="list-item" href="{{ url_for('users.login') }}">Sign in</a></li>
-                {% endif %}
-            </ul>
-            <div class="burger-menu">
-                <div class="bar bar--top"></div>
-                <div class="bar bar--middle"></div>
-                <div class="bar bar--bottom"></div>
+<div id="preloader">
+    <div class="jumper">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+<header>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="/"><h2>Jasurbek's Blog<em>.</em></h2></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                {% set navigaion_bar = [
+                ('/', 'home', 'Home'),
+                (url_for('main.about_me'), 'about_me', 'About me'),
+                (url_for('posts.show_posts'), 'blog', 'Blog')
+            ] -%}
+                {% set navigaion_bar_auth = [
+                (url_for('users.login'), 'login', 'Login'),
+                (url_for('users.register'), 'register', 'Sign up')
+            ] %}
+                <ul class="navbar-nav ml-auto">
+                    {% for href, id, caption in navigaion_bar %}
+                        <li {% if id == active_page %}class="nav-item active"{% else %}class="nav-item"{% endif %}>
+                            <a class="nav-link" href="{{ href }}">{{ caption }}</a>
+                        </li>
+                    {% endfor %}
+                    <span class="separator"></span>
+                    {% block nav %}{% endblock %}
+
+                    {% if current_user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('users.logout') }}">Logout</a>
+                        </li>
+                    {% else %}
+                        {% for href, id, caption in navigaion_bar_auth %}
+                            <li {% if id == active_page %}class="nav-item active"{% else %}class="nav-item"{% endif %}>
+                                <a class="nav-link" href="{{ href }}">{{ caption }}</a>
+                            </li>
+                        {% endfor %}
+                    {% endif %}
+                </ul>
             </div>
         </div>
-    </div>
+    </nav>
 </header>
 
 {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
         {% for category, message in messages %}
-        <div class="message alert alert-{{ category }} alert-dismissible fade show w-75 mx-auto" role="alert">
-            {{ message }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+            <div class="message alert alert-{{ category }} alert-dismissible fade show " role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
         {% endfor %}
     {% endif %}
 {% endwith %}
@@ -90,16 +85,58 @@
 <footer>
     <div class="container">
         <div class="row">
-            <p>&copy; 2022 Jasurbek</p>
+            <div class="col-lg-12">
+                <ul class="social-icons">
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Linkedin</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-12">
+                <div class="copyright-text">
+                    <p>&copy; 2022 <a href="https://myblog.nvrbckdown.uz/">Jasurbek's Blog</a></p>
+                </div>
+            </div>
         </div>
     </div>
 </footer>
 
-<script src="{{ url_for('static', filename='js/ScrollMonitor.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/TweenMax.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script>
+    const header = document.querySelector('header');
+    const sectionOne = document.querySelector('.scroll-border');
+
+    const sectionOneOptions = {
+        rootMargin: "-200px 0px 0px 0px"
+    }
+
+    const sectionOneObserver = new IntersectionObserver(function (
+            entries,
+            sectionOneObserver
+        ) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    header.classList.add('background-header');
+                } else {
+                    header.classList.remove('background-header')
+                }
+            })
+        },
+        sectionOneOptions);
+
+    sectionOneObserver.observe(sectionOne);
+</script>
+
+<script src="{{ url_for('static', filename='jquery/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename="bootstrap/js/bootstrap.bundle.min.js") }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
         crossorigin="anonymous"></script>
+<!-- Additional Scripts -->
+<script src="{{ url_for('static', filename="js/custom.js") }}"></script>
+<script src="{{ url_for('static', filename="js/owl.js") }}"></script>
+<script src="{{ url_for('static', filename="js/slick.js") }}"></script>
+<script src="{{ url_for('static', filename="js/isotope.js") }}"></script>
+<script src="{{ url_for('static', filename="js/accordions.js") }}"></script>
+
 </body>
 </html>

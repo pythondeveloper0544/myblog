@@ -1,37 +1,133 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-    <section class="flex align-items-center">
+    <div class="heading-page header-text scroll-border">
+      <section class="page-heading">
         <div class="container">
-            <div class="row article-wrapper justify-center align-top">
-                <div class="article-header col-md-8">
-                    <h1 class="title">{{ article }}</h1>
-                    <div class="date">
-                        <span>{{ article.date.date() }} &emsp; {{ article.poster }}</span>
-                    </div>
-                </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="text-content">
+                <h4>Post Details</h4>
+                <h2>Single blog post</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
 
-                <article class="content col-md-8 col-12">
-                    <p>
-                        {{ article.content|safe }}
-                    </p>
-                </article>
+  <section class="blog-posts grid-system">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="all-blog-posts">
+              <div class="row">
+                  <div>
+                      {% if current_user.is_admin %}
+                          <a href="{{ url_for('posts.edit_post', id=article.id) }}"
+                             class="btn btn-outline-primary btn-sm">Edit</a>
+                          <a href="{{ url_for('posts.delete_post', id=article.id) }}"
+                             class="btn btn-outline-danger btn-sm">Delete</a>
+                      {% endif %}
+                  </div>
+                <div class="col-lg-12">
+                  <div class="blog-post">
+{#                    <div class="blog-thumb">#}
+{#                      <img src="assets/images/blog-post-02.jpg" alt="">#}
+{#                    </div>#}
+                    <div class="down-content">
+                      <span>{{ article.category }}</span>
+                      <h4>{{ article }}</h4>
+                      <ul class="post-info">
+                        <li><a href="">{{ article.poster }}</a></li>
+                        <li><a href="">{{ article.date.date() }}</a></li>
+                          {% if article.comments %}
+                              {% if article.comments|count == 1 %}
+                                  <li><a href="#">{{ article.comments|count }} Comment</a></li>
+                              {% else %}
+                                  <li><a href="#">{{ article.comments|count }} Comments</a></li>
+                              {% endif %}
+                          {% endif %}
+                      </ul>
+                      {{ article.content|safe }}
+                      <div class="post-options">
+                        <div class="row">
+                          <div class="col-6">
+                            <ul class="post-tags">
+                              <li><i class="fa fa-tags"></i></li>
+                                {% for tag in article.tags %}
+                                    <li><a href="{{ url_for('posts.posts_by_tag', id=tag.id) }}">{{ tag }}</a></li>
+                                {% endfor %}
+                            </ul>
+                          </div>
+                          <div class="col-6">
+                            <ul class="post-share">
+                              <li><i class="fa fa-share-alt"></i></li>
+                              <li><a href="#">Facebook</a>,</li>
+                              <li><a href="#"> Twitter</a></li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="sidebar-item comments">
+                    <div class="sidebar-heading">
+                        {% if article.comments %}
+                              {% if article.comments|count == 1 %}
+                                  <h2>{{ article.comments|count }} Comment</h2>
+                              {% else %}
+                                  <h2>{{ article.comments|count }} Comments</h2>
+                              {% endif %}
+                          {% endif %}
+                    </div>
+                    <div class="content">
+                      <ul>
+                        <li>
+{#                          <div class="author-thumb">#}
+{#                            <img src="assets/images/comment-author-01.jpg" alt="">#}
+{#                          </div>#}
+                            {% for comment in comments %}
+                          <div class="right-content">
+                            <h4>{{ comment.user }}<span>{{ comment.date.date() }}</span></h4>
+                            <p>{{ comment }}</p>
+                          </div>
+                        </li>
+                          {% endfor %}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="sidebar-item submit-comment">
+                    <div class="sidebar-heading">
+                      <h2>Your comment</h2>
+                    </div>
+                    <div class="content">
+                      <form action="/add-comment/{{ article.id }}" method="post">
+                        <div class="row">
+                            <div class="col-lg-12">
+                            <fieldset>
+                              <textarea name="comment" rows="6" id="comment" placeholder="Type your comment" required></textarea>
+                            </fieldset>
+                          </div>
+                          <div class="col-lg-12">
+                            <fieldset>
+                              <button type="submit" id="form-submit" class="main-button">Submit</button>
+                            </fieldset>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-        <div class="input-group">
-            <form action="/add-comment/{{ article.id }}" method="post">
-                <label for="comment" class="form-label">Add comment</label>
-                <textarea name="comment" id="comment" class="form-control mb-3"></textarea>
-                <button type="submit" class="btn btn-primary">Comment</button>
-            </form>
+          </div>
+        {% include 'inc/_sidebar.html' %}
         </div>
-            <div>
-                {% if current_user.is_admin %}
-                    <a href="{{ url_for('posts.edit_post', id=article.id) }}" class="btn btn-outline-primary btn-sm">Edit</a>
-                    <a href="{{ url_for('posts.delete_post', id=article.id) }}"
-                       class="btn btn-outline-danger btn-sm">Delete</a>
-                {% endif %}
-            </div>
-        </div>
+      </div>
     </section>
 {% endblock %}

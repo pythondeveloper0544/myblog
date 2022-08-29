@@ -18,7 +18,7 @@ def register():
         db.session.commit()
         flash('Your account has been created', "success")
         return redirect('users.login')
-    return render_template('users/register.html', form=form)
+    return render_template('users/register.html', form=form, active_page='register')
 
 
 @users.route('/login', methods=['POST', 'GET'])
@@ -28,11 +28,12 @@ def login():
         user = Users.query.filter_by(email=form.email.data).first()
         if user and user.check_password(form.password.data):
             login_user(user, remember=form.remember.data)
-            flash("You're successfully logged in!", "success")
+            # flash("You're successfully logged in!", "success")
+            flash(f"Welcome {user}!", "success")
             return redirect('/')
         else:
             flash('Login unsuccessfully. Please check email an password again.', "warning")
-    return render_template('users/login.html', form=form)
+    return render_template('users/login.html', form=form, active_page='login')
 
 
 @users.route('/logout')

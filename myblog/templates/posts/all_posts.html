@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% block nav %}
+    {% if current_user.is_admin %}
+        <li {% if active_page == 'create_post' %}class="nav-item active"{% else %}class="nav-item"{% endif %}>
+            <a class="nav-link" href="{{ url_for('posts.create_post') }}">Add post</a>
+        </li>
+    {% endif %}
+{% endblock %}
+{% block content %}
+    <div class="heading-page header-text scroll-border">
+      <section class="page-heading">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="text-content">
+                <h4>Read now</h4>
+                <h2>Our Recent Blog Posts</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <section class="blog-posts grid-system">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="all-blog-posts">
+                        <div class="row">
+                            {% for article in articles.items %}
+                                <div class="col-lg-6">
+                                    <div class="blog-post">
+                                        <!-- <div class="blog-thumb">
+                                          <img src="assets/images/blog-thumb-01.jpg" alt="">
+                                        </div> -->
+                                        <div class="down-content">
+                                            <span>{{ article.category }}</span>
+                                            <a href="{{ url_for('posts.post_detail', id=article.id, slug=article.slug ) }}"><h4>{{ article }}</h4>
+                                            </a>
+                                            <ul class="post-info">
+                                                <li><a href="#">{{ article.poster }}</a></li>
+                                                <li><a href="#">{{ article.date.date() }}</a></li>
+                                                {% if article.comments %}
+                                                    {% if article.comments|count == 1 %}
+                                                        <li><a href="#">{{ article.comments|count }} Comment</a></li>
+                                                    {% else %}
+                                                        <li><a href="#">{{ article.comments|count }} Comments</a></li>
+                                                    {% endif %}
+                                                {% endif %}
+                                            </ul>
+                                            {{ article.content[:150]|safe }}
+                                            <div class="post-options">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <ul class="post-tags">
+                                                            <li><i class="fa fa-tags"></i></li>
+                                                            {% for tag in article.tags %}
+                                                                <li><a href="#">{{ tag }}</a></li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% if articles.has_next or articles.has_prev %}
+                            <div class="col-lg-12">
+                                <ul class="page-numbers">
+                                    {% for page_num in articles.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                                        {% if page_num %}
+                                            {% if articles.page == page_num %}
+                                                <li class="active"><a href="{{ url_for('posts.show_posts', page=page_num) }}">{{ page_num }}</a></li>
+                                            {% else %}
+                                                <li><a href="{{ url_for('posts.show_posts', page=page_num) }}">{{ page_num }}</a></li>
+                                            {% endif %}
+                                        {% else %}
+                                            <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% include 'inc/_sidebar.html' %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

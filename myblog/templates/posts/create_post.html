@@ -1,16 +1,33 @@
 {% extends 'base.html' %}
 
 {% block content %}
-   <div class="container" style="margin-top: 100px">
+   <div class="container" style="margin-top: 50px">
+   <h2 class="mb-4 text-center">Add post</h2>
      <form method="post" enctype="multipart/form-data">
          {{ form.hidden_tag() }}
-        {{ form.title.label(class="form-label") }}
+        {{ form.title.label(class="form-label") }} :
         {{ form.title(class="form-control") }}
         <br>
-        {{ form.content.label(class="form-label") }}
+        {{ form.content.label(class="form-label") }} :
         {{ form.content() }}
+         <br>
+         {{ form.topic.label(class="form-label") }} :
+        {{ form.topic(class="form-select") }}
+         <br>
+         {{ form.tags.label(class="form-label") }} :
+        {{ form.tags(class="form-control") }}
+     <div class="w-25 mt-4 mb-4">
+         <h6 class="pb-3">Existed tags:</h6>
+         <div>
+             <ul class="d-flex justify-content-between">
+                 {% for tag in tags %}
+                     <li>#{{ tag }}</li>
+                 {% endfor %}
+             </ul>
+         </div>
+     </div>
         <br>
-        {{ form.submit(class="btn btn-primary") }}
+        {{ form.submit(class="btn btn-primary w-100") }}
      </form>
      {{ ckeditor.load() }}
      {{ ckeditor.config(name='content') }}

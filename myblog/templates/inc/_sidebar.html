@@ -1,0 +1,42 @@
+<div class="col-lg-4">
+    <div class="sidebar">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="sidebar-item search">
+                    <form class="d-flex align-items-center" name="gs" method="post" action="{{ url_for('main.search') }}">
+                        <input type="text" name="q" class="searchText" placeholder="type to search..." required>
+                        <button class="btn btn-outline-primary h-75"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="sidebar-item categories">
+                    <div class="sidebar-heading">
+                        <h2>Topics</h2>
+                    </div>
+                    <div class="content">
+                        <ul>
+                            {% for topic in topics %}
+                                <li><a class="text-capitalize" href="{{ url_for('posts.posts_by_topic', id=topic.id) }}">- {{ topic }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="sidebar-item tags">
+                    <div class="sidebar-heading">
+                        <h2>Tag Clouds</h2>
+                    </div>
+                    <div class="content">
+                        <ul>
+                            {% for tag in tags %}
+                                <li><a href="{{ url_for('posts.posts_by_tag', id=tag.id) }}">#{{ tag }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

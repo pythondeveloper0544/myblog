@@ -1,47 +1,21 @@
 {% extends 'base.html' %}
+
 {% block content %}
-    <div class="hero scroll-border">
-
+    <div class="heading-page header-text scroll-border">
+      <section class="page-heading">
         <div class="container">
-
-            <div class="left">
-
-                <h1 class="h1" style="font-size: 3.25rem">
-                    Hi, I'm <b>Jasurbek</b>.
-                    <br>Backend Developer
-                </h1>
-
-                <div class="">
-                    <a href="#" class="btn btn-primary rounded-pill">Contact Me</a>
-                    <a href="#" class="btn btn-secondary rounded-pill ">About Me</a>
-                </div>
-
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="text-content">
+                <h4>You searched</h4>
+                <h2>{{ searched }}</h2>
+              </div>
             </div>
-
-            <div class="right">
-                <svg class="home__blob" viewBox="0 0 200 187" xmlns="http://www.w3.org/2000/svg"
-                     xmlns:xlink="http://www.w3.org/1999/xlink">
-                    <mask id="mask0" mask-type="alpha">
-                        <path d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 165.547
-                  130.807 187.559 100.226 186.353C69.6454 185.297 41.0228 161.023 21.7403 129.362C2.45775
-                  97.8511 -7.48481 59.1033 6.67581 34.5279C20.9871 10.1032 59.7028 -0.149132 97.9666
-                  0.00163737C136.23 0.303176 174.193 10.857 190.312 36.4879Z"/>
-                    </mask>
-                    <g mask="url(#mask0)">
-                        <path d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346
-                  165.547 130.807 187.559 100.226 186.353C69.6454 185.297 41.0228 161.023 21.7403
-                  129.362C2.45775 97.8511 -7.48481 59.1033 6.67581 34.5279C20.9871 10.1032 59.7028
-                  -0.149132 97.9666 0.00163737C136.23 0.303176 174.193 10.857 190.312 36.4879Z"/>
-                        <image class="home__blob-img" y="-20" xlink:href="./static/img/Jasurbek.png"/>
-                    </g>
-                </svg>
-            </div>
-
+          </div>
         </div>
-
+      </section>
     </div>
-
-    <section class="blog-posts">
+<section class="blog-posts">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
@@ -91,11 +65,6 @@
                                     </div>
                                 </div>
                             {% endfor %}
-                            <div class="col-lg-12">
-                                <div class="main-button">
-                                    <a href="{{ url_for('posts.show_posts') }}">View All Posts</a>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -103,5 +72,4 @@
             </div>
         </div>
     </section>
-
 {% endblock %}

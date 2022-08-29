@@ -51,8 +51,8 @@ class Comment(db.Model):
 
 class Topic(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(150), nullable=False)
-    post_id = db.relationship(Article)
+    name = db.Column(db.String(150), nullable=False, unique=True, index=True)
+    posts = db.relationship(Article, backref="category")
 
     def __repr__(self):
         return self.name
@@ -60,7 +60,7 @@ class Topic(db.Model):
 
 class Tag(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(150), nullable=False)
+    name = db.Column(db.String(150), nullable=False, unique=True, index=True)
 
     def __repr__(self):
         return self.name
@@ -74,7 +74,7 @@ class Users(UserMixin, db.Model):
     joined_at = db.Column(db.DateTime, default=datetime.utcnow)
     admin = db.Column(db.Boolean, default=False)
     posts = db.relationship(Article, backref="poster", passive_deletes=True)
-    comments = db.relationship(Comment, passive_deletes=True)
+    comments = db.relationship(Comment, backref="user", passive_deletes=True)
 
     @property
     def is_admin(self):
