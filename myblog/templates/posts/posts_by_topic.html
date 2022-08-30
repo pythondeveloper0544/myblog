@@ -21,7 +21,7 @@
                 <div class="col-lg-8">
                     <div class="all-blog-posts">
                         <div class="row">
-                            {% for article in articles %}
+                            {% for article in articles.items %}
                                 <div class="col-lg-6">
                                     <div class="blog-post">
                                         <!-- <div class="blog-thumb">
@@ -42,7 +42,7 @@
                                                     {% endif %}
                                                 {% endif %}
                                             </ul>
-                                            {{ article.content[:150]|safe }}
+                                            <p>{{ article.content[50:200] }}</p>
                                             <div class="post-options">
                                                 <div class="row">
                                                     <div class="col-lg-12">
@@ -61,10 +61,19 @@
                             {% endfor %}
                             <div class="col-lg-12">
                                 <ul class="page-numbers">
-                                    <li><a href="#">1</a></li>
-                                    <li class="active"><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
+                                    {% for page_num in articles.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                                      {% if page_num > 1 %}
+                                        {% if page_num %}
+                                            {% if articles.page == page_num %}
+                                                <li class="active"><a href="{{ url_for('posts.show_posts', page=page_num) }}">{{ page_num }}</a></li>
+                                            {% else %}
+                                                <li><a href="{{ url_for('posts.show_posts', page=page_num) }}">{{ page_num }}</a></li>
+                                            {% endif %}
+                                        {% else %}
+                                            ...
+                                        {% endif %}
+                                      {% endif %}
+                                    {% endfor %}
                                 </ul>
                             </div>
                         </div>

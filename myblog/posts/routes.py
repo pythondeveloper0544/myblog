@@ -16,7 +16,7 @@ def context_processor():
 @posts.route('/posts')
 def show_posts():
     page = request.args.get('page', 1, type=int)
-    articles = Article.query.order_by(Article.date.desc()).paginate(page=page, per_page=4)
+    articles = Article.query.order_by(Article.date.desc()).paginate(page=page, per_page=10)
     return render_template('posts/all_posts.html', articles=articles, active_page='blog')
 
 @posts.route('/create-post', methods=['POST', 'GET'])
@@ -112,7 +112,8 @@ def add_comment(id):
 
 @posts.route('/topic/<int:id>')
 def posts_by_topic(id):
-    articles = Article.query.filter_by(topic=id)
+    page = request.args.get('page', 1, type=int)
+    articles = Article.query.filter_by(topic=id).paginate(page=page, per_page=10)
     topic = Topic.query.get_or_404(id)
     return render_template('posts/posts_by_topic.html', articles=articles, topic=topic)
 

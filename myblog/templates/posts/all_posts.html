@@ -48,7 +48,7 @@
                                                     {% endif %}
                                                 {% endif %}
                                             </ul>
-                                            {{ article.content[:150]|safe }}
+                                            <p>{{ article.content[50:200]|safe }}</p>
                                             <div class="post-options">
                                                 <div class="row">
                                                     <div class="col-lg-12">
@@ -67,7 +67,6 @@
                             {% endfor %}
                             <div class="col-lg-12">
                                 <ul class="page-numbers">
-
                                     {% for page_num in articles.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
                                       {% if page_num > 1 %}
                                         {% if page_num %}
@@ -77,10 +76,10 @@
                                                 <li><a href="{{ url_for('posts.show_posts', page=page_num) }}">{{ page_num }}</a></li>
                                             {% endif %}
                                         {% else %}
-                                            <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
-                                        {% endif %}{% endif %}
+                                            ...
+                                        {% endif %}
+                                      {% endif %}
                                     {% endfor %}
-
                                 </ul>
                             </div>
                         </div>
