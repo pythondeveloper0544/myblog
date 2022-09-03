@@ -1,0 +1,40 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}Posts{% endblock %}
+
+{% block content %}
+    <div class="details">
+        <div class="cardHeader">
+            <h2>Posts</h2>
+        </div>
+        <table>
+            <thead>
+            <tr>
+                <td>Title</td>
+                <td>Topic</td>
+                <td>Comments</td>
+                <td>Author</td>
+                <td>Date</td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for article in articles %}
+                <tr>
+                    <td>{{ article }}</td>
+                    <td>{{ article.topic }}</td>
+                    <td>{{ article.coments|count }}</td>
+                    <td>{{ article.poster }}</td>
+                    <td>{{ article.date.date() }}</td>
+                    <td>
+                        <a href="{{ url_for('posts.edit_post', id=article.id) }}"><i class="uil uil-edit"></i></a>
+                    </td>
+                    <td>
+                        <a href="{{ url_for('posts.delete_post', id=article.id) }}"><i class="uil uil-trash-alt"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

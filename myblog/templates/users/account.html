@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="formContainer">
+        <div class="formCard">
+            <div class="formHeader">
+                <div class="imgBx">
+                    <img src="{{ avatar }}">
+                </div>
+                <div class="title">
+                    <h2>{{ current_user }}</h2>
+                    <h4>{{ current_user.email }}</h4>
+                </div>
+                <div class="detail">
+                    <p>Posts: {{ current_user.posts|count }}</p>
+                    <p>Comments: {{ current_user.comments|count }}</p>
+                </div>
+            </div>
+            <div class="formBx">
+                <form method="post" enctype="multipart/form-data">
+                    {{ form.hidden_tag() }}
+                    <div class="formField">
+                        {% if form.username.errors %}
+                            {{ form.username(class="is-invalid") }}
+                            <span></span>
+                            <div class="invalid-feedback">
+                                {% for error in form.username.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.username() }}
+                            <span></span>
+                        {% endif %}
+                        {{ form.username.label() }}
+                    </div>
+                    <div class="formField">
+                        {% if form.email.errors %}
+                            {{ form.email(class="is-invalid") }}
+                            <span></span>
+                            <div class="invalid-feedback">
+                                {% for error in form.email.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.email() }}
+                            <span></span>
+                        {% endif %}
+                        {{ form.email.label() }}
+                    </div>
+                    <div class="formField">
+                        {% if form.avatar.errors %}
+                            {{ form.avatar(class="is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.avatar.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.avatar() }}
+                        {% endif %}
+                    <div class="upload">
+                        <i class="fa fa-cloud-upload"></i>
+                        {{ form.avatar.label(class="uploadBtn") }}
+                    </div>
+                    </div>
+                    <div class="formBtn">
+                        {{ form.submit(class="btn") }}
+                        <span></span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

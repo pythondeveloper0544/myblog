@@ -1,0 +1,52 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}Users{% endblock %}
+
+{% block content %}
+    <div class="details">
+    <div class="cardHeader">
+        <h2>Users</h2>
+        <button>Update</button>
+    </div>
+        <table>
+            <thead>
+            <tr>
+                <td>ID</td>
+                <td>Username</td>
+                <td>Email</td>
+                <td>Posts</td>
+                <td>Comments</td>
+                <td>Admin</td>
+                <td>Date</td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.posts|count }} <small><a href="">View all</a></small></td>
+                    <td>{{ user.comments|count }} <small><a href="">View all</a></small></td>
+                    <td>
+                        <form>
+                            {% if user.admin %}
+                                <input type="checkbox" name="checked" checked>
+                                {% else %}
+                                <input type="checkbox" name="checked">
+                            {% endif %}
+                        </form></td>
+                    <td>{{ user.joined_at.date() }}</td>
+                    <td>
+                        <a href=""><i class="uil uil-edit"></i></a>
+                    </td>
+                    <td>
+                        <a href=""><i class="uil uil-trash-alt"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

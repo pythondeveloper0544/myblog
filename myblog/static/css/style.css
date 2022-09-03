@@ -37,6 +37,8 @@ https://templatemo.com/tm-551-stand-blog
 
 * {
     padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -45,10 +47,8 @@ https://templatemo.com/tm-551-stand-blog
 
 body {
     font-family: 'Roboto', sans-serif;
+    height: 100vh;
     overflow-x: hidden;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
 
 p {
@@ -550,7 +550,6 @@ ul.page-numbers li a:hover {
 }
 
 .blog-posts .comments ul li {
-    display: inline-block;
     margin-bottom: 20px;
     padding-bottom: 20px;
     border-bottom: 1px solid #eee;
@@ -577,7 +576,7 @@ ul.page-numbers li a:hover {
 }
 
 .blog-posts .comments ul li .right-content {
-    margin-left: 130px;
+    margin-left: 30px;
 }
 
 .blog-posts .comments ul li .right-content h4 {
@@ -772,12 +771,12 @@ footer {
     margin-top: 100px;
     text-align: center;
     background-color: var(--foreground-primary);
-    padding: 60px 0;
+    padding: 20px 0;
 }
 
 footer ul.social-icons {
-    padding-bottom: 60px;
-    margin-bottom: 60px;
+    padding-bottom: 40px;
+    margin-bottom: 40px;
     border-bottom: 1px solid rgba(250, 250, 250, 0.15);
 }
 
@@ -1086,8 +1085,8 @@ footer p a:hover {
 }
 .error {
     /*height: calc(100vh - 495px);*/
-    padding-top: 35px;
-    padding-bottom: 99px;
+    padding-top: 115px;
+    padding-bottom: 139px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1109,4 +1108,178 @@ footer p a:hover {
 
 .error p {
     color: #f7f7f7;
+}
+
+.formContainer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: var(--accent);
+    margin-bottom: -100px;
+}
+
+.formCard {
+    position: absolute;
+    top: 8%;
+    left: calc(50% - 250px);
+    width: 500px;
+    height: 600px;
+    padding: 10px 25px;
+    border-radius: 20px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.5);
+    background-color: #f7f7f7;
+}
+
+.formHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.formHeader .imgBx {
+    width: 100px;
+    height: 100px;
+    margin-right: 25px;
+}
+
+.formHeader .imgBx img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.formHeader .title {
+    margin-left: -100px;
+}
+
+.formHeader .title h2 {
+    font-size: 2em;
+}
+
+.formHeader .title h4 {
+    font-size: 1.1em;
+    color: var(--foreground-secondary) !important;
+}
+
+.formBx {
+    padding: 25px;
+}
+
+.formBx .formField {
+    position: relative;
+    width: 100%;
+    border-bottom: 2px solid #999;
+    margin: 50px 0;
+}
+
+.formBx .formField input {
+    width: 100%;
+    padding: 0 5px;
+    height: 40px;
+    outline: none;
+    border: none;
+    font-size: 16px;
+    opacity: 0;
+    transition: 0.6s;
+}
+
+.formBx .formField label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    transition: .5s;
+}
+
+.formBx .formField span {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #287bff;
+    transition: .5s;
+}
+.formBx .formField input:focus {
+    opacity: 1;
+}
+
+.formBx .formField input:focus ~ label
+{
+    top: -5px;
+    color: #287bff;
+}
+
+.formBx .formField input:focus ~ span,
+.formBx .formField input:valid ~ span
+{
+    width: 100%;
+}
+
+.formBx .formField input[type="file"] {
+    opacity: 1;
+}
+
+.formBx .formField .upload {
+    width: 35%;
+    position: absolute;
+    top: 0;
+    transform: translateY(-15%);
+    height: 40px;
+    background-color: #287bff;
+    color: #f7f7f7;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.formBx .formField .upload i {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+}
+
+.formBx .formField .upload .uploadBtn {
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    cursor: pointer;
+}
+
+
+.formBx .formBtn .btn{
+    width: 100%;
+    height: 50px;
+    font-size: 18px;
+    color: #f7f7f7;
+    background-color: #287bff;
+    border: 1px solid;
+    border-radius: 25px;
+    outline: none;
+    overflow: hidden;
+    z-index: 111;
+}
+
+.formBx .formBtn .btn:hover {
+    border: #287bff;
+    transition: .5s;
+}
+
+.formBx .formBtn span {
+    position: absolute;
+    bottom: 9%;
+    left: 4%;
+    width: 25px;
+    height: 55px;
+    transform: skew(-30deg);
+    background: rgba(255,255,255,0.3);
+    transition: .5s ease-in-out;
+}
+
+.formBx .formBtn:hover .btn ~ span {
+    left: 92%;
+    transform: skew(30deg);
+    background: rgba(255,255,255,0.9);
 }

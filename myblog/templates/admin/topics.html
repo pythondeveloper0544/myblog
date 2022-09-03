@@ -1,0 +1,47 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}Topics{% endblock %}
+
+{% block content %}
+    <div class="details">
+        <div class="cardHeader">
+            <h2>Topics</h2>
+            <button class="createBtn">+ Create New</button>
+        </div>
+        <div class="topic">
+            <form method="post">
+                <label>
+                    <input type="text" placeholder="Title" id="topic" name="topic" required>
+                </label>
+                <button class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        <table>
+            <thead>
+            <tr>
+                <td>ID</td>
+                <td>Title</td>
+                <td>Posts</td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for topic in topics %}
+                <tr>
+                    <td>{{ topic.id }}</td>
+                    <td>{{ topic }}</td>
+                    <td>{{ topic.posts|count }}</td>
+
+                    <td>
+                        <a href=""><i class="uil uil-edit"></i></a>
+                    </td>
+                    <td>
+                        <a href=""><i class="uil uil-trash-alt"></i></a>
+                    </td>
+                    <td style="width: 50%"></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

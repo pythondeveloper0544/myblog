@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}Dashboard{% endblock %}</title>
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="shortcut icon" href="{{ url_for('static', filename="img/logo.png") }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename="admin/css/style.css") }}">
+</head>
+<body>
+<div class="container">
+    <div class="nav">
+        <ul>
+            <li>
+                <a href="/">
+                    <span class="icon"><img src="{{ url_for('static', filename='img/logo.png') }}" alt="logo"
+                                            width="28"></span>
+                    <span class="title">Jasurbek's Blog</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ url_for('admin.dashboard') }}">
+                    <span class="icon"><i class="uil uil-home"></i></span>
+                    <span class="title">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ url_for('admin.users') }}">
+                    <span class="icon"><i class="uil uil-user"></i></span>
+                    <span class="title">Users</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ url_for('admin.posts') }}">
+                    <span class="icon"><i class="uil uil-subject"></i></span>
+                    <span class="title">Posts</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ url_for('admin.topics') }}">
+                    <span class="icon"><i class="uil uil-layers"></i></span>
+                    <span class="title">Topics</span>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <span class="icon"><i class="uil uil-envelope"></i></span>
+                    <span class="title">Messages <small>#not working now</small></span>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <span class="icon"><i class="uil uil-setting"></i></span>
+                    <span class="title">Settings &nbsp; <small>#not working now</small></span>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <span class="icon"><i class="uil uil-lock"></i></span>
+                    <span class="title">Password <small>#not working now</small></span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ url_for('users.logout') }}">
+                    <span class="icon"><i class="uil uil-signout"></i></span>
+                    <span class="title">Sign out</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ url_for('main.index') }}">
+                    <span class="icon"><i class="uil uil-sign-in-alt"></i></span>
+                    <span class="title">View site</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="main">
+        <div class="topbar">
+            <div class="toggle">
+                <i class="uil uil-bars"></i>
+            </div>
+            <div class="search">
+                <form action="" method="post">
+                    <label>
+                        <input type="text" name="searched" id="searched" placeholder="Search here...">
+                        <i class="uil uil-search"></i>
+                    </label>
+                </form>
+            </div>
+            <div class="user">
+                <img src="{{ current_user.avatar }}">
+            </div>
+        </div>
+        {% block content %}
+        {% endblock %}
+        <h1>I have no idea what to put here</h1>
+    </div>
+</div>
+<script src="{{ url_for('static', filename="admin/js/script.js") }}"></script>
+</body>
+</html>

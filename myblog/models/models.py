@@ -1,9 +1,9 @@
 from flask_login import UserMixin
 from slugify import slugify
-from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
-
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from myblog import db, login_manager
+from flask import current_app
 from datetime import datetime
 
 
@@ -71,10 +71,24 @@ class Users(UserMixin, db.Model):
     username = db.Column(db.String(255), unique=True, index=True)
     email = db.Column(db.String(125), unique=True, index=True)
     password_hash = db.Column(db.String(125))
+    avatar = db.Column(db.String(), default="user-profile.png")
     joined_at = db.Column(db.DateTime, default=datetime.utcnow)
     admin = db.Column(db.Boolean, default=False)
     posts = db.relationship(Article, backref="poster", passive_deletes=True)
     comments = db.relationship(Comment, backref="user", passive_deletes=True)
+
+    def get_reset_token(self, expires_time=1800):
+        s = Serializer(current_app.config['SECRET_KEY'], expires_in=expires_time)
+        return s.dumps({'user_id: self.id'}).decode('utf-8')
+
+    @staticmethod
+    def verify_reset_token(token):
+        s = Serializer(current_app.config['SECRET_KEY'])
+        try:
+            user_id = s.loads(token)['user_id']
+        except:
+            return None
+        return Users.query.get(user_id)
 
     @property
     def is_admin(self):

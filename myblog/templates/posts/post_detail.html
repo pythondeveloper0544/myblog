@@ -84,18 +84,17 @@
                           {% endif %}
                     </div>
                     <div class="content">
-                      <ul>
+                      <ul>{% for comment in comments %}
                         <li>
 {#                          <div class="author-thumb">#}
 {#                            <img src="assets/images/comment-author-01.jpg" alt="">#}
 {#                          </div>#}
-                            {% for comment in comments %}
                           <div class="right-content">
                             <h4>{{ comment.user }}<span>{{ comment.date.date() }}</span></h4>
                             <p>{{ comment }}</p>
                           </div>
                         </li>
-                          {% endfor %}
+                      {% endfor %}
                       </ul>
                     </div>
                   </div>

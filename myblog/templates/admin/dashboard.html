@@ -1,0 +1,34 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+    <div class="cardBox">
+        <div class="card">
+            <div>
+                <div class="numbers">{{ users }}</div>
+                <div class="cardName">Users</div>
+            </div>
+            <div class="iconBx">
+                <i class="uil uil-user"></i>
+            </div>
+        </div>
+        <div class="card">
+            <div>
+                <div class="numbers">{{ articles }}</div>
+                <div class="cardName">Posts</div>
+            </div>
+            <div class="iconBx">
+                <i class="uil uil-document-layout-left"></i>
+            </div>
+        </div>
+        <div class="card">
+            <div>
+                <div class="numbers">{{ comments }}</div>
+                <div class="cardName">Comments</div>
+            </div>
+            <div class="iconBx">
+                <i class="uil uil-comment"></i>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
