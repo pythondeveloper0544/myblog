@@ -42,7 +42,7 @@ def create_post():
             flash('New post has been created', "success")
             return redirect(url_for('posts.show_posts'))
     else:
-        return abort(403)
+        abort(403)
 
     return render_template('posts/create_post.html', form=form, active_page='create_post')
 

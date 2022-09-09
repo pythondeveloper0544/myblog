@@ -9,7 +9,7 @@ def error_404(e):
 
 @errors.app_errorhandler(403)
 def error_403(e):
-    return render_template('errors/404.html'), 403
+    return render_template('errors/403.html'), 403
 
 
 @errors.app_errorhandler(500)
